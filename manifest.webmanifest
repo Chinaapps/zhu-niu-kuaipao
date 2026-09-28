@@ -1,0 +1,1 @@
+{"name": "奶蛙快跑 · 阳光漫游", "short_name": "奶蛙快跑", "lang": "zh-CN", "start_url": "./", "scope": "./", "display": "standalone", "orientation": "portrait-primary", "background_color": "#b9e9ee", "theme_color": "#75d1da", "icons": [{"src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any"}]}

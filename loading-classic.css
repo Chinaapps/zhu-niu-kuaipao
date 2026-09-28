@@ -1,0 +1,91 @@
+/* Restore the v5.2 loading screen shown in the user's reference. */
+#loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 25px;
+  background: radial-gradient(ellipse at 45% 25%, #91c5c6, #6587a2 65%, #716180);
+  color: #fff7df;
+  text-align: center;
+  font-weight: 900;
+}
+#loading::before, #loading > b::after { display: none; }
+#loading .load-mascot {
+  display: block;
+  position: static;
+  flex-shrink: 0;
+  width: 95px;
+  height: 95px;
+  background: url('icon.svg') center / contain no-repeat;
+  font-size: 0;
+  animation: hop 1.3s ease-in-out infinite;
+  filter: drop-shadow(0 8px 3px #082c4588);
+}
+#loading > b {
+  position: static;
+  width: auto;
+  font-size: 34px;
+  font-weight: 900;
+  letter-spacing: 0;
+  line-height: normal;
+  color: #fff0ab;
+  text-shadow: 0 3px #a38066;
+  -webkit-text-stroke: 0;
+  transform: none;
+}
+#loading #loadStatus {
+  position: static;
+  width: auto;
+  max-width: 100%;
+  padding: 0;
+  background: none;
+  border: 0;
+  border-radius: 0;
+  font-size: 14px;
+  line-height: normal;
+  color: #fff7df;
+  text-shadow: none;
+  overflow-wrap: anywhere;
+}
+#loading .load-track {
+  display: block;
+  position: static;
+  flex-shrink: 0;
+  width: 75%;
+  height: 10px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #5d7b9180;
+  border: 2px solid #d4e3d2;
+  box-shadow: none;
+}
+#loading .load-track i {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, #eac188, #ffeba9);
+  border-radius: 0;
+  box-shadow: none;
+}
+#loading small {
+  position: static;
+  width: auto;
+  font-size: 11px;
+  line-height: normal;
+  color: #f3ecd9;
+  text-shadow: none;
+}
+#loading #reloadGame {
+  position: static;
+  width: auto;
+  padding: 12px 25px;
+  background: #ffdb35;
+  border: 0;
+  border-radius: 10px;
+  color: #684113;
+  font-weight: 900;
+}
+@media (prefers-reduced-motion: reduce) {
+  #loading .load-mascot { animation: none; }
+}
