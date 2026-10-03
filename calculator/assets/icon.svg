@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7cc4ff"/>
+      <stop offset="1" stop-color="#b48bff"/>
+    </linearGradient>
+    <linearGradient id="g2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="rgba(255,255,255,.85)"/>
+      <stop offset="1" stop-color="rgba(255,255,255,.25)"/>
+    </linearGradient>
+  </defs>
+  <rect x="16" y="16" width="480" height="480" rx="110" fill="url(#g1)"/>
+  <rect x="16" y="16" width="480" height="480" rx="110" fill="url(#g2)" opacity="0.25"/>
+  <rect x="48" y="48" width="416" height="416" rx="90" fill="rgba(10,16,40,.35)" stroke="rgba(255,255,255,.4)" stroke-width="6"/>
+  <rect x="80" y="84" width="352" height="96" rx="26" fill="rgba(8,12,30,.6)" stroke="rgba(255,255,255,.25)" stroke-width="4"/>
+  <text x="96" y="150" font-family="Arial, sans-serif" font-size="56" font-weight="bold" fill="#eaf0ff">π</text>
+  <g font-family="Arial, sans-serif" font-size="46" font-weight="bold" fill="#fff" text-anchor="middle">
+    <text x="136" y="286">+</text>
+    <text x="256" y="286">−</text>
+    <text x="376" y="286">×</text>
+    <text x="136" y="400">÷</text>
+    <text x="256" y="400">√</text>
+    <text x="376" y="400">=</text>
+  </g>
+</svg>

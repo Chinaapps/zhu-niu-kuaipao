@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Liquid Glass 数学计算器 · 任意精度</title>
+  <meta name="description" content="Liquid Glass 数学计算器 —— 纯计算器，任意精度、任意大数，包含全部数学运算符号，无单位换算。">
+  <meta name="theme-color" content="#0b1020">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <canvas id="lg-background"></canvas>
+
+  <div class="lg-layer" id="lg-glow"></div>
+
+  <main class="calculator glass" id="calc" role="application" aria-label="Liquid Glass 数学计算器">
+    <header class="calc-header">
+      <div class="brand">
+        <span class="brand-dot"></span>
+        <h1>Liquid Glass <em>数学计算器</em></h1>
+      </div>
+      <div class="status-row">
+        <span class="precision">
+          <label for="prec">精度</label>
+          <select id="prec" title="小数位数">
+            <option value="30">30 位</option>
+            <option value="50" selected>50 位</option>
+            <option value="80">80 位</option>
+            <option value="120">120 位</option>
+            <option value="200">200 位</option>
+          </select>
+        </span>
+        <span class="badge">纯计算器 · 任意精度</span>
+      </div>
+    </header>
+
+    <section class="display glass-panel">
+      <div class="expr-wrap">
+        <input id="expr" class="expr" type="text" inputmode="text" spellcheck="false"
+               autocomplete="off" autocapitalize="off"
+               placeholder="输入或点击按钮，例如 2^100、sin(pi/2)、fact(50)"
+               aria-label="表达式">
+      </div>
+      <div id="result" class="result" aria-live="polite">0</div>
+      <div id="hint" class="hint">支持 + − × ÷ ^ √ sin cos tan ln log exp 阶乘 nCr nPr gcd …</div>
+    </section>
+
+    <nav class="mode-tabs" role="tablist" aria-label="面板">
+      <button class="tab active" data-panel="basic" role="tab" aria-selected="true">基础</button>
+      <button class="tab" data-panel="sci" role="tab" aria-selected="false">函数</button>
+      <button class="tab" data-panel="num" role="tab" aria-selected="false">数论</button>
+    </nav>
+
+    <!-- 基础面板 -->
+    <section class="keys basic-panel active" data-panel="basic">
+      <button class="key fn" data-insert="(">( )</button>
+      <button class="key fn" data-insert=")">)</button>
+      <button class="key danger" data-cmd="clear">AC</button>
+      <button class="key danger" data-cmd="backspace">⌫</button>
+
+      <button class="key fn" data-insert="%">%</button>
+      <button class="key fn" data-insert="//">÷整</button>
+      <button class="key op" data-insert="^">xʸ</button>
+      <button class="key op" data-insert="÷">÷</button>
+
+      <button class="key digit" data-insert="7">7</button>
+      <button class="key digit" data-insert="8">8</button>
+      <button class="key digit" data-insert="9">9</button>
+      <button class="key op" data-insert="×">×</button>
+
+      <button class="key digit" data-insert="4">4</button>
+      <button class="key digit" data-insert="5">5</button>
+      <button class="key digit" data-insert="6">6</button>
+      <button class="key op" data-insert="-">−</button>
+
+      <button class="key digit" data-insert="1">1</button>
+      <button class="key digit" data-insert="2">2</button>
+      <button class="key digit" data-insert="3">3</button>
+      <button class="key op" data-insert="+">+</button>
+
+      <button class="key fn" data-insert="(-">±</button>
+      <button class="key digit" data-insert="0">0</button>
+      <button class="key digit" data-insert=".">.</button>
+      <button class="key equals" data-cmd="equals">=</button>
+    </section>
+
+    <!-- 函数面板 -->
+    <section class="keys sci-panel" data-panel="sci">
+      <button class="key fn" data-fn="sin">sin</button>
+      <button class="key fn" data-fn="cos">cos</button>
+      <button class="key fn" data-fn="tan">tan</button>
+      <button class="key fn" data-insert="pi">π</button>
+
+      <button class="key fn" data-fn="asin">asin</button>
+      <button class="key fn" data-fn="acos">acos</button>
+      <button class="key fn" data-fn="atan">atan</button>
+      <button class="key fn" data-insert="e">e</button>
+
+      <button class="key fn" data-fn="sinh">sinh</button>
+      <button class="key fn" data-fn="cosh">cosh</button>
+      <button class="key fn" data-fn="tanh">tanh</button>
+      <button class="key fn" data-insert="phi">φ</button>
+
+      <button class="key fn" data-fn="ln">ln</button>
+      <button class="key fn" data-fn="log10">log₁₀</button>
+      <button class="key fn" data-fn="log2">log₂</button>
+      <button class="key fn" data-fn="exp">eˣ</button>
+
+      <button class="key fn" data-fn="sqrt">√</button>
+      <button class="key fn" data-fn="cbrt">∛</button>
+      <button class="key fn" data-fn="root">n√</button>
+      <button class="key fn" data-fn="abs">|x|</button>
+
+      <button class="key fn" data-fn="floor">⌊x⌋</button>
+      <button class="key fn" data-fn="ceil">⌈x⌉</button>
+      <button class="key fn" data-fn="min">min</button>
+      <button class="key fn" data-fn="max">max</button>
+    </section>
+
+    <!-- 数论面板 -->
+    <section class="keys num-panel" data-panel="num">
+      <button class="key fn" data-fn="fact">n!</button>
+      <button class="key fn" data-fn="nCr">nCr</button>
+      <button class="key fn" data-fn="nPr">nPr</button>
+      <button class="key fn" data-fn="mod">mod</button>
+
+      <button class="key fn" data-fn="gcd">gcd</button>
+      <button class="key fn" data-fn="lcm">lcm</button>
+      <button class="key fn" data-fn="isprime">素数?</button>
+      <button class="key fn" data-fn="nextprime">下个素数</button>
+
+      <button class="key fn" data-fn="factor">分解</button>
+      <button class="key fn" data-cmd="copy">复制</button>
+      <button class="key fn" data-cmd="history">历史</button>
+      <button class="key fn" data-cmd="help">帮助</button>
+    </section>
+
+    <footer class="calc-footer">
+      <span>Powered by Python 引擎 · 任意精度 · 无超时</span>
+    </footer>
+  </main>
+
+  <!-- 历史记录浮层 -->
+  <div class="overlay" id="history-overlay" hidden>
+    <div class="sheet glass">
+      <div class="sheet-head">
+        <span>计算历史</span>
+        <button class="ghost" data-close="history">×</button>
+      </div>
+      <ul id="history-list" class="history-list"></ul>
+      <button class="ghost full" data-cmd="clear-history">清空历史</button>
+    </div>
+  </div>
+
+  <!-- 帮助浮层 -->
+  <div class="overlay" id="help-overlay" hidden>
+    <div class="sheet glass">
+      <div class="sheet-head">
+        <span>使用帮助</span>
+        <button class="ghost" data-close="help">×</button>
+      </div>
+      <div class="help-body">
+        <p>纯计算器：无任何单位换算，任意精度、任意大数，等一会儿即可算出，不会超时。</p>
+        <p>函数写法：<code>sin(pi/2)</code>、<code>sqrt(2)</code>、<code>ln(e)</code>、<code>nCr(52,5)</code>、<code>fact(50)</code>、<code>2^100</code>。</p>
+        <p>常数：<code>pi</code> π、<code>e</code>、<code>phi</code> φ、<code>tau</code> τ。</p>
+        <p>整数运算：<code>%</code> 取模、<code>//</code> 整除、<code>^</code> 乘方。</p>
+        <p>运算符优先级：<code>^</code> &gt; <code>× ÷ % //</code> &gt; <code>+ −</code>，括号优先。</p>
+        <p>可在上方输入框直接打字，也可点击按钮；按 <kbd>Enter</kbd> 或 <kbd>=</kbd> 计算。</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
