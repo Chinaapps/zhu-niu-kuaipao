@@ -6,7 +6,7 @@
 
 | 平台 | 链接 |
 |------|------|
-| 🌐 GitHub Pages | https://chinaapps.github.io/zhu-niu-kuaipao/ |
+| 🌐 GitHub Pages | https://chinaapps.github.io/zn/ |
 | ☁️ 豆包永久链接 | https://4kgz4yzxqn84v.doubaoapps.com/app/app_17ey2ks560w |
 
 ## ✨ 特色
